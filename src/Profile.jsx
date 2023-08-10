@@ -10,7 +10,7 @@ function Profile() {
 
       <div className="profile__overlay-edit">
         <img
-          class="profile__btn-edit-photo"
+          className="profile__btn-edit-photo"
           src={iconEdit}
           alt="Botón para editar
             foto del perfil"
