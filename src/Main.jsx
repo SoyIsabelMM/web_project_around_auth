@@ -2,6 +2,8 @@ import React from "react";
 import Profile from "./Profile";
 import Elements from "./Elements";
 import Popup from "./Popup";
+import Modal from "./Modal";
+import Template from "./Template";
 
 function Main() {
   return (
@@ -9,6 +11,8 @@ function Main() {
       <Profile />
       <Elements />
       <Popup />
+      <Modal />
+      <Template />
     </main>
   );
 }
