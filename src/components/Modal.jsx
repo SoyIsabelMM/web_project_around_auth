@@ -1,5 +1,5 @@
 import React from "react";
-import closeIcon from "./images/close-icon.png";
+import closeIcon from "../images/close-icon.png";
 
 function Modal() {
   return (

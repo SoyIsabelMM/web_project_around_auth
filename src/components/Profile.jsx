@@ -1,9 +1,9 @@
 import React from "react";
-import imageProfile from "./images/image-profile.jpeg";
-import iconEdit from "./images/icon-edit.png";
-import addBtn from "./images/add-btn.png";
+import imageProfile from "../images/image-profile.jpeg";
+import iconEdit from "../images/icon-edit.png";
+import addBtn from "../images/add-btn.png";
 
-function Profile() {
+function Profile({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick }) {
   return (
     <section className="profile">
       <img src={imageProfile} alt="Foto de Perfil" className="profile__image" />
@@ -14,10 +14,11 @@ function Profile() {
           src={iconEdit}
           alt="Botón para editar
             foto del perfil"
+          onClick={onEditAvatarClick}
         />
       </div>
       <div className="profile__info">
-        <button className="profile__info-edit-btn">
+        <button className="profile__info-edit-btn" onClick={onEditProfileClick}>
           <img
             className="profile__info-icon-edit"
             src={iconEdit}
@@ -28,7 +29,7 @@ function Profile() {
         <h2 className="profile__info-about">Develop</h2>
       </div>
 
-      <button className="profile__add-btn">
+      <button className="profile__add-btn" onClick={onAddPlaceClick}>
         <img
           className="profile__add-btn-image"
           src={addBtn}
