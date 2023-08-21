@@ -1,43 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
 import Profile from "./Profile";
 import Elements from "./Elements";
-import Popup from "./Popup";
-import Modal from "./Modal";
 import Template from "../Template";
 import PopupWithForm from "./PopupWithForm";
+import Input from "./Input";
 
-function Main() {
-  const handleEditAvatarClick = () => {
-    const modalElement = document.querySelector(".modal-window ");
-    const formElement = modalElement.querySelector("#change-profile");
-
-    modalElement.classList.remove("open");
-    formElement.classList.remove("open");
-  };
-
-  const handleEditProfileClick = () => {
-    const popupEditProfile = document.querySelector("#edit-profile-form");
-
-    popupEditProfile.classList.remove("open");
-  };
-
-  const handleAddPlaceClick = () => {
-    const popupEditProfile = document.querySelector("#add-picture-form");
-
-    popupEditProfile.classList.remove("open");
-  };
-
+function Main({
+  onEditProfileClick,
+  onAddPlaceClick,
+  onEditAvatarClick,
+  isEditProfilePopupOpen,
+  isAddPlacePopupOpen,
+  isEditAvatarPopupOpen,
+}) {
   return (
     <main className="content">
       <Profile
-        onEditAvatarClick={handleEditAvatarClick}
-        onEditProfileClick={handleEditProfileClick}
-        onAddPlaceClick={handleAddPlaceClick}
+        onEditAvatarClick={onEditAvatarClick}
+        onEditProfileClick={onEditProfileClick}
+        onAddPlaceClick={onAddPlaceClick}
       />
+      <PopupWithForm
+        title={"Editar Perfil"}
+        className="popup"
+        id="edit-profile-form"
+        name="Guardar"
+        isOpen={isEditProfilePopupOpen}
+      >
+        <Input
+          type="text"
+          className="popup__container-input"
+          placeholder="Nombre"
+          id="name"
+          maxLength="40"
+        >
+          <span className="popup__input-error name-error"></span>
+        </Input>
+
+        <Input
+          type="text"
+          className="popup__container-input"
+          placeholder="Profesión"
+          id="about-me"
+          maxLength="200"
+        >
+          <span className="popup__input-error name-error"></span>
+        </Input>
+      </PopupWithForm>
+
+      <PopupWithForm
+        title={"Nuevo Lugar"}
+        className="popup"
+        id="add-picture-form"
+        name="Guardar"
+        isOpen={isAddPlacePopupOpen}
+      >
+        <Input
+          type="text"
+          className="popup__container-input"
+          placeholder="Título"
+          id="title-place"
+          maxLength="30"
+        >
+          <span className="popup__input-error title-place-error"></span>
+        </Input>
+
+        <Input
+          type="url"
+          className="popup__container-input"
+          placeholder="Enlace a la imagen"
+          id="new-image"
+        >
+          <span className="popup__input-error name-error"></span>
+        </Input>
+      </PopupWithForm>
+
+      <PopupWithForm
+        title={"Cambiar foto de perfil"}
+        className="modal-window"
+        id="change-profile"
+        name="Guardar"
+        isOpen={isEditAvatarPopupOpen}
+      >
+        <Input
+          type="url"
+          className="modal-window__input-url-change"
+          placeholder="Título"
+          id="url-change"
+        >
+          <span className="url-change-error"></span>
+        </Input>
+      </PopupWithForm>
 
       <Elements />
-      <Popup />
-      <Modal />
       <Template />
     </main>
   );

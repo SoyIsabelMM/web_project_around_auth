@@ -1,10 +1,13 @@
 import React from "react";
 import closeIcon from "../images/close-icon.png";
 
-function PopupWithForm({ name, title }) {
+function PopupWithForm(props) {
   return (
-    <section className="popup">
-      <div className="pup__overlay"></div>
+    <section
+      className={`${props.className} ${props.isOpen ? "open" : ""}`}
+      id={props.id}
+    >
+      <div className="popup__overlay"></div>
       <div className="popup__container">
         <button className="popup__container-close-popup">
           <img
@@ -15,11 +18,13 @@ function PopupWithForm({ name, title }) {
           />
         </button>
 
-        <h3 className="popup__container-text">{title}</h3>
+        <h3 className="popup__container-text">{props.title}</h3>
+
+        {props.children}
 
         <form className="popup__container-form" noValidate>
           <button className="popup__container-save-btn" type="submit">
-            Guardar
+            {props.name}
           </button>
         </form>
       </div>
