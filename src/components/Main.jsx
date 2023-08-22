@@ -17,6 +17,7 @@ function Main({
 }) {
   const [userName, setUserName] = useState("");
   const [userAbout, setUserAbout] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
 
   useEffect(() => {
     api
