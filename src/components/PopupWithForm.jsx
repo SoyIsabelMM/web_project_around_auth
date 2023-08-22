@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import closeIcon from "../images/close-icon.png";
 
 function PopupWithForm(props) {
@@ -8,7 +7,11 @@ function PopupWithForm(props) {
       id={props.id}
     >
       <div className="popup__overlay"></div>
-      <div className="popup__container">
+      <div
+        className={`${
+          props.classNameModal ? props.classNameModal : "popup__container"
+        }`}
+      >
         <button
           className="popup__container-close-popup"
           onClick={props.onClose}

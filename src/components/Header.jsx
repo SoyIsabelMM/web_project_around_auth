@@ -5,6 +5,7 @@ function Header() {
   return (
     <header className="header">
       <img
+        className="header__logo-header"
         src={logo}
         alt="Logo Around, alrededor
         de los estados unidos"

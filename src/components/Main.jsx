@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Profile from "./Profile";
 import Elements from "./Elements";
 import Template from "../Template";
@@ -85,6 +84,7 @@ function Main({
         name="Guardar"
         isOpen={isEditAvatarPopupOpen}
         onClose={onClose}
+        classNameModal="modal-window__change-image"
       >
         <Input
           type="url"
