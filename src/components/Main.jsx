@@ -3,6 +3,8 @@ import Elements from "./Elements";
 import Template from "../Template";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
+import api from "../utils/api";
+import { useEffect, useState } from "react";
 
 function Main({
   onEditProfileClick,
@@ -13,9 +15,26 @@ function Main({
   isEditAvatarPopupOpen,
   onClose,
 }) {
+  const [userName, setUserName] = useState("");
+  const [userAbout, setUserAbout] = useState("");
+
+  useEffect(() => {
+    api
+      .getUserInfoFromServer()
+      .then((userData) => {
+        setUserName(userData.name);
+        setUserAbout(userData.about);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <main className="content">
       <Profile
+        userName={userName}
+        userAbout={userAbout}
         onEditAvatarClick={onEditAvatarClick}
         onEditProfileClick={onEditProfileClick}
         onAddPlaceClick={onAddPlaceClick}

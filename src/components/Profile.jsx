@@ -3,7 +3,13 @@ import imageProfile from "../images/image-profile.jpeg";
 import iconEdit from "../images/icon-edit.png";
 import addBtn from "../images/add-btn.png";
 
-function Profile({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick }) {
+function Profile({
+  onEditAvatarClick,
+  onEditProfileClick,
+  onAddPlaceClick,
+  userName,
+  userAbout,
+}) {
   return (
     <section className="profile">
       <img src={imageProfile} alt="Foto de Perfil" className="profile__image" />
@@ -25,8 +31,8 @@ function Profile({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick }) {
             alt="Botón editar perfil"
           />
         </button>
-        <h1 className="profile__info-name">James Costeu</h1>
-        <h2 className="profile__info-about">Develop</h2>
+        <h1 className="profile__info-name"> {userName} </h1>
+        <h2 className="profile__info-about"> {userAbout} </h2>
       </div>
 
       <button className="profile__add-btn" onClick={onAddPlaceClick}>

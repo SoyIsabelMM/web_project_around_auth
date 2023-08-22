@@ -1,6 +1,10 @@
 import closeIcon from "../images/close-icon.png";
 
 function PopupWithForm(props) {
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+  };
+
   return (
     <section
       className={`${props.className} ${props.isOpen ? "open" : ""}`}
@@ -28,7 +32,11 @@ function PopupWithForm(props) {
 
         {props.children}
 
-        <form className="popup__container-form" noValidate>
+        <form
+          className="popup__container-form"
+          noValidate
+          onSubmit={handleSubmit}
+        >
           <button className="popup__container-save-btn" type="submit">
             {props.name}
           </button>
