@@ -21,6 +21,12 @@ function App() {
     setIsAddPlacePopupOpen(false);
   };
 
+  const closeAllPopups = () => {
+    setIsEditAvatarPopupOpen(true);
+    setIsEditProfilePopupOpen(true);
+    setIsAddPlacePopupOpen(true);
+  };
+
   return (
     <div className="page">
       <Header />
@@ -31,6 +37,7 @@ function App() {
         isEditProfilePopupOpen={isEditProfilePopupOpen}
         isAddPlacePopupOpen={isAddPlacePopupOpen}
         isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
       />
       <Footer />
     </div>

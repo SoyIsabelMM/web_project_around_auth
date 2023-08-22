@@ -12,6 +12,7 @@ function Main({
   isEditProfilePopupOpen,
   isAddPlacePopupOpen,
   isEditAvatarPopupOpen,
+  onClose,
 }) {
   return (
     <main className="content">
@@ -26,6 +27,7 @@ function Main({
         id="edit-profile-form"
         name="Guardar"
         isOpen={isEditProfilePopupOpen}
+        onClose={onClose}
       >
         <Input
           type="text"
@@ -54,6 +56,7 @@ function Main({
         id="add-picture-form"
         name="Guardar"
         isOpen={isAddPlacePopupOpen}
+        onClose={onClose}
       >
         <Input
           type="text"
@@ -81,6 +84,7 @@ function Main({
         id="change-profile"
         name="Guardar"
         isOpen={isEditAvatarPopupOpen}
+        onClose={onClose}
       >
         <Input
           type="url"
