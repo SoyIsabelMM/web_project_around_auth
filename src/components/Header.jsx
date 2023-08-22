@@ -1,10 +1,11 @@
 import React from "react";
-import logo from "./images/header-logo.png";
+import logo from "../images/header-logo.png";
 
 function Header() {
   return (
     <header className="header">
       <img
+        className="header__logo-header"
         src={logo}
         alt="Logo Around, alrededor
         de los estados unidos"

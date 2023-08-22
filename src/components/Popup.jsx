@@ -1,10 +1,10 @@
 import React from "react";
-import closeIcon from "./images/close-icon.png";
+import closeIcon from "../images/close-icon.png";
 
 function Popup() {
   return (
     <>
-      <section className="poppup open">
+      <section className="popup open" id="edit-profile-form">
         <div className="popup__overlay"></div>
         <div className="popup__container">
           <button className="popup__container-close-popup">
@@ -14,8 +14,8 @@ function Popup() {
               para cerrar cuadro emergente"
               className="popup__container-close-icon"
             />
-            <h3 className="popup__container-text">Editar perfil</h3>
           </button>
+          <h3 className="popup__container-text">Editar perfil</h3>
 
           <form className="popup__container-form" noValidate>
             <input
