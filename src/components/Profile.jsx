@@ -1,5 +1,4 @@
 import React from "react";
-import imageProfile from "../images/image-profile.jpeg";
 import iconEdit from "../images/icon-edit.png";
 import addBtn from "../images/add-btn.png";
 
@@ -9,10 +8,15 @@ function Profile({
   onAddPlaceClick,
   userName,
   userAbout,
+  userAvatar,
 }) {
   return (
     <section className="profile">
-      <img src={imageProfile} alt="Foto de Perfil" className="profile__image" />
+      <img
+        src={`${userAvatar}`}
+        alt="Foto de Perfil"
+        className="profile__image"
+      />
 
       <div className="profile__overlay-edit">
         <img

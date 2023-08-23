@@ -25,6 +25,7 @@ function Main({
       .then((userData) => {
         setUserName(userData.name);
         setUserAbout(userData.about);
+        setUserAvatar(userData.avatar);
       })
       .catch((err) => {
         console.log(err);
@@ -36,6 +37,7 @@ function Main({
       <Profile
         userName={userName}
         userAbout={userAbout}
+        userAvatar={userAvatar}
         onEditAvatarClick={onEditAvatarClick}
         onEditProfileClick={onEditProfileClick}
         onAddPlaceClick={onAddPlaceClick}
