@@ -16,16 +16,18 @@
 @import url(./blocks/profile/__info-about/profile__info-about.css);
 @import url(./blocks/profile/__add-btn/profile__add-btn.css);
 @import url(./blocks/profile/__add-btn-image/profile__add-btn-image.css);
-@import url(./blocks/elements/elements.css);
-@import url(./blocks/elements/__card-container/elements__card-container.css);
-@import url(./blocks/elements/__card-container-btn-delete/elements__card-container-btn-delete.css);
-@import url(./blocks/elements/__card-container-icon-delete/elements__card-container-icon-delete.css);
-@import url(./blocks/elements/__card-container-image/elements__card-container-image.css);
-@import url(./blocks/elements/__card-container-footing/elements__card-container-footing.css);
-@import url(./blocks/elements/__card-container-footing-title/elements__card-container-footing-title.css);
-@import url(./blocks/elements/__card-container-footing-btn/elements__card-container-footing-btn.css);
-@import url(./blocks/elements/__card-container-footing-btn/_active/elements__card-container-footing-btn_active.css);
-@import url(./blocks/elements/__like-counter/elements__like-counter.css);
+
+@import url(./blocks/card-elements/card-elements.css);
+@import url(./blocks/card-elements/__container/card-elements__container.css);
+@import url(./blocks/card-elements/__container-btn-delete/card-elements__container-btn-delete.css);
+@import url(./blocks/card-elements/__container-icon-delete/card-elements__container-icon-delete.css);
+@import url(./blocks/card-elements/__container-image/card-elements__container-image.css);
+@import url(./blocks/card-elements/__container-footing/card-elements__container-footing.css);
+@import url(./blocks/card-elements/__container-footing-title/card-elements__container-footing-title.css);
+@import url(./blocks/card-elements/__container-footing-btn/card-elements__container-footing-btn.css);
+@import url(./blocks/card-elements/__container-footing-btn/_active/card-elements__container-footing-btn_active.css);
+@import url(./blocks/card-elements/__like-counter/card-elements__like-counter.css);
+
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);
 @import url(./blocks/popup/popup.css);

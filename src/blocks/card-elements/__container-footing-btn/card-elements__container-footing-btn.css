@@ -1,4 +1,4 @@
-.elements__card-container-footing-btn {
+.card-elements__container-footing-btn {
   border: none;
   background-color: inherit;
   cursor: pointer;
@@ -12,6 +12,6 @@
   object-fit: cover;
 }
 
-.elements__card-container-footing-btn:hover {
+.card-elements__container-footing-btn:hover {
   opacity: 0.5;
 }

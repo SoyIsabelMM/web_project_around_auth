@@ -1,8 +1,9 @@
 import Profile from "./Profile";
-import Elements from "./Elements";
-import Template from "../Template";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
+import { useEffect, useState } from "react";
+import api from "../utils/api";
+import CardsElements from "./CardsElements";
 
 function Main({
   onEditProfileClick,
@@ -13,13 +14,47 @@ function Main({
   isEditAvatarPopupOpen,
   onClose,
 }) {
+  const [userName, setUserName] = useState("");
+  const [userAbout, setUserAbout] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    api
+      .getUserInfoFromServer()
+      .then((userData) => {
+        setUserName(userData.name);
+        setUserAbout(userData.about);
+        setUserAvatar(userData.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    api
+      .getCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <main className="content">
       <Profile
+        userName={userName}
+        userAbout={userAbout}
+        userAvatar={userAvatar}
         onEditAvatarClick={onEditAvatarClick}
         onEditProfileClick={onEditProfileClick}
         onAddPlaceClick={onAddPlaceClick}
       />
+
+      <CardsElements cards={cards} />
+
       <PopupWithForm
         title={"Editar Perfil"}
         className="popup"
@@ -95,9 +130,6 @@ function Main({
           <span className="url-change-error"></span>
         </Input>
       </PopupWithForm>
-
-      <Elements />
-      <Template />
     </main>
   );
 }
