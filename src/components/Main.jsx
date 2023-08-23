@@ -18,6 +18,8 @@ function Main({
   const [userAbout, setUserAbout] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
 
+  const [cards, setCards] = useState([]);
+
   useEffect(() => {
     api
       .getUserInfoFromServer()
@@ -25,6 +27,15 @@ function Main({
         setUserName(userData.name);
         setUserAbout(userData.about);
         setUserAvatar(userData.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    api
+      .getCards()
+      .then((data) => {
+        setCards(data);
       })
       .catch((err) => {
         console.log(err);
@@ -41,6 +52,9 @@ function Main({
         onEditProfileClick={onEditProfileClick}
         onAddPlaceClick={onAddPlaceClick}
       />
+
+      <CardsElements cards={cards} />
+
       <PopupWithForm
         title={"Editar Perfil"}
         className="popup"
@@ -116,8 +130,6 @@ function Main({
           <span className="url-change-error"></span>
         </Input>
       </PopupWithForm>
-
-      <CardsElements />
     </main>
   );
 }
