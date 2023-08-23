@@ -1,10 +1,9 @@
 import Profile from "./Profile";
-import Elements from "./Elements";
-import Template from "../Template";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
-import api from "../utils/api";
 import { useEffect, useState } from "react";
+import api from "../utils/api";
+import CardsElements from "./CardsElements";
 
 function Main({
   onEditProfileClick,
@@ -118,8 +117,7 @@ function Main({
         </Input>
       </PopupWithForm>
 
-      <Elements />
-      <Template />
+      <CardsElements />
     </main>
   );
 }
