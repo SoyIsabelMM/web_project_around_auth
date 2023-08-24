@@ -2,7 +2,11 @@ import React from "react";
 import iconDelete from "../images/icon-delete.png";
 import btnLike from "../images/btn-like.png";
 
-function Card({ name, link, likes }) {
+function Card({ name, link, likes, onCardClick }) {
+  const handleClick = () => {
+    onCardClick({ name, link });
+  };
+
   return (
     <div className="card-elements__container">
       <button className="card-elements__container-btn-delete">
@@ -12,7 +16,12 @@ function Card({ name, link, likes }) {
           alt="icon eliminar imágen"
         />
       </button>
-      <img className="card-elements__container-image" src={link} alt={name} />
+      <img
+        className="card-elements__container-image"
+        src={link}
+        alt={name}
+        onClick={handleClick}
+      />
       <div className="card-elements__container-footing">
         <h3 className="card-elements__container-footing-title"> {name} </h3>
         <img

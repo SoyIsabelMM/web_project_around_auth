@@ -1,8 +1,7 @@
 import React from "react";
 import Card from "./Card";
 
-function CardsElements({ cards }) {
-  console.log(cards);
+function CardsElements({ cards, onCardClick }) {
   return (
     <section className="card-elements">
       {/* Here we will show all our cards  */}
@@ -13,6 +12,7 @@ function CardsElements({ cards }) {
             name={card.name}
             link={card.link}
             likes={card.likes.length}
+            onCardClick={() => onCardClick(card)}
           />
         );
       })}
