@@ -4,6 +4,7 @@ import Input from "./Input";
 import { useEffect, useState } from "react";
 import api from "../utils/api";
 import CardsElements from "./CardsElements";
+import ImagePopup from "./ImagePopup";
 
 function Main({
   onEditProfileClick,
@@ -13,6 +14,8 @@ function Main({
   isAddPlacePopupOpen,
   isEditAvatarPopupOpen,
   onClose,
+  onCardClick,
+  selectedCard,
 }) {
   const [userName, setUserName] = useState("");
   const [userAbout, setUserAbout] = useState("");
@@ -53,7 +56,7 @@ function Main({
         onAddPlaceClick={onAddPlaceClick}
       />
 
-      <CardsElements cards={cards} />
+      <CardsElements cards={cards} onCardClick={onCardClick} />
 
       <PopupWithForm
         title={"Editar Perfil"}
@@ -130,6 +133,7 @@ function Main({
           <span className="url-change-error"></span>
         </Input>
       </PopupWithForm>
+      <ImagePopup onClose={onClose} selectedCard={selectedCard} />
     </main>
   );
 }
