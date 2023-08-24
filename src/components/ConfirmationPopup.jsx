@@ -1,7 +1,7 @@
 import React from "react";
 import closeIcon from "../images/close-icon.png";
 
-function PopupSayYes(props) {
+function ConfirmationPopup(props) {
   return (
     <section className={` ${props.className} ${props.isOpen ? "open" : ""}`}>
       <div className="modal-window__overlay"></div>
@@ -23,4 +23,4 @@ function PopupSayYes(props) {
   );
 }
 
-export default PopupSayYes;
+export default ConfirmationPopup;

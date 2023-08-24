@@ -25,11 +25,17 @@ function Card({ name, link, likes, onCardClick }) {
       <div className="card-elements__container-footing">
         <h3 className="card-elements__container-footing-title"> {name} </h3>
         <img
-          className="card-elements__container-footing-btn"
+          className={`card-elements__container-footing-btn ${
+            likes ? "card-elements__container-footing-btn_inactive" : ""
+          }`}
           src={btnLike}
           alt="like inactivo"
         />
-        <span className="card-elements__like-counter"> {likes} </span>
+        {likes !== 0 && (
+          <>
+            <span className="card-elements__like-counter"> {likes} </span>
+          </>
+        )}
       </div>
     </div>
   );

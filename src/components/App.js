@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Footer from "./components/Footer";
-import "./index.css";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+import "../index.css";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(true);
