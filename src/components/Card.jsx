@@ -14,10 +14,14 @@ function Card({ name, link, likes, onCardClick }) {
           className="card-elements__container-icon-delete"
           src={iconDelete}
           alt="icon eliminar imágen"
-          onClick={handleClick}
         />
       </button>
-      <img className="card-elements__container-image" src={link} alt={name} />
+      <img
+        className="card-elements__container-image"
+        src={link}
+        alt={name}
+        onClick={handleClick}
+      />
       <div className="card-elements__container-footing">
         <h3 className="card-elements__container-footing-title"> {name} </h3>
         <img

@@ -4,7 +4,7 @@ import closeIcon from "../images/close-icon.png";
 function ImagePopup({ selectedCard, onClose }) {
   return (
     <>
-      <section className={`modal ${selectedCard ? "open" : ""}`}>
+      <section className={`modal ${selectedCard ? "" : "open"}`}>
         <div className="modal__container">
           <img
             className="modal__container-close"
