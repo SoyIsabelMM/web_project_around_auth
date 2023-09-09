@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import "../index.css";
+import api from "../utils/api";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(true);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(true);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(true);
   const [selectedCard, setSelectedCard] = useState(null);
+
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    api
+      .getUserInfoFromServer()
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+      })
+      .catch((err) => {
+        console.log("Disculpa, se ha encontrado un error:", err);
+      });
+  }, []);
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(false);
