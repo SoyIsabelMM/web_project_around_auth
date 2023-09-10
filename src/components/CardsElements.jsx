@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 
-function CardsElements({ cards, onCardClick }) {
+function CardsElements({ cards, onCardClick, onCardLike }) {
 
   return (
     <section className="card-elements">
@@ -14,6 +14,7 @@ function CardsElements({ cards, onCardClick }) {
             link={card.link}
             likes={card.likes}
             onCardClick={() => onCardClick(card)}
+            onCardLike={() => onCardLike(card)}
             owner={card.owner}
           />
         );

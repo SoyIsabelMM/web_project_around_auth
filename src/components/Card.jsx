@@ -4,10 +4,14 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 import { useContext } from "react";
 
 
-function Card({ name, link, likes, onCardClick, owner}) {
+function Card({ name, link, likes, onCardClick, owner, onCardLike}) {
   const handleClick = () => {
     onCardClick({ name, link });
   };
+
+  const handleCardLike = () => {
+    onCardLike();
+  }
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -43,6 +47,7 @@ function Card({ name, link, likes, onCardClick, owner}) {
           className={cardLikeBtnClassName}
           src={btnLike}
           alt="like inactivo"
+          onClick={handleCardLike}
         />
         {likes.length !== 0 && (
           <>

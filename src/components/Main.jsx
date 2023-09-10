@@ -34,6 +34,20 @@ useEffect(() => {
     });
 }, []);
 
+function handleCardLikeOrDisLike(card) {
+  const isLike = card.likes.some(i => i._id === currentUser._id);
+
+ if (isLike) {
+  api.deleteLikeFromCard(card._id, isLike).then((newCard) => {
+    setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+  });
+ } else {
+  api.addLikeFromCard(card._id, !isLike).then((newCard) => {
+    setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+  });
+ }
+}
+
   return (
     <main className="content">
       <Profile
@@ -45,7 +59,7 @@ useEffect(() => {
         onAddPlaceClick={onAddPlaceClick}
       />
 
-      <CardsElements cards={cards} onCardClick={onCardClick} />
+      <CardsElements cards={cards} onCardClick={onCardClick} onCardLike={handleCardLikeOrDisLike}/>
 
       <PopupWithForm
         title={"Editar Perfil"}
