@@ -1,10 +1,11 @@
 import Profile from "./Profile";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../utils/api";
 import CardsElements from "./CardsElements";
 import ImagePopup from "./ImagePopup";
+import { CurrentUserContext } from "../context/CurrentUserContext";
 
 function Main({
   onEditProfileClick,
@@ -17,40 +18,28 @@ function Main({
   onCardClick,
   selectedCard,
 }) {
-  const [userName, setUserName] = useState("");
-  const [userAbout, setUserAbout] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
 
-  const [cards, setCards] = useState([]);
+const currentUser = useContext(CurrentUserContext);
 
-  useEffect(() => {
-    api
-      .getUserInfoFromServer()
-      .then((userData) => {
-        setUserName(userData.name);
-        setUserAbout(userData.about);
-        setUserAvatar(userData.avatar);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+const [cards, setCards] = useState([]);
 
-    api
-      .getCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+useEffect(() => {
+  api
+    .getCards()
+    .then((data) => {
+      setCards(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
 
   return (
     <main className="content">
       <Profile
-        userName={userName}
-        userAbout={userAbout}
-        userAvatar={userAvatar}
+        userName={currentUser && currentUser.name}
+        userAbout={currentUser && currentUser.about}
+        userAvatar={currentUser && currentUser.avatar}
         onEditAvatarClick={onEditAvatarClick}
         onEditProfileClick={onEditProfileClick}
         onAddPlaceClick={onAddPlaceClick}
