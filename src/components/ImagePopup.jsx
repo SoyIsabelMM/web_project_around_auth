@@ -3,8 +3,8 @@ import closeIcon from "../images/close-icon.png";
 
 function ImagePopup({ selectedCard, onClose }) {
   return (
-    <>
       <section className={`modal ${selectedCard ? "" : "open"}`}>
+         <div onClick={onClose} className="modal__overlay"></div>
         <div className="modal__container">
           <img
             className="modal__container-close"
@@ -27,8 +27,8 @@ function ImagePopup({ selectedCard, onClose }) {
           )}
         </div>
       </section>
-    </>
   );
 }
+
 
 export default ImagePopup;

@@ -6,6 +6,7 @@ import api from "../utils/api";
 import CardsElements from "./CardsElements";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../context/CurrentUserContext";
+import ConfirmationPopup from "./ConfirmationPopup"
 
 function Main({
   onEditProfileClick,
@@ -17,6 +18,8 @@ function Main({
   onClose,
   onCardClick,
   selectedCard,
+  confirmation,
+  onConfirmation
 }) {
 
 const currentUser = useContext(CurrentUserContext);
@@ -59,7 +62,7 @@ function handleCardLikeOrDisLike(card) {
         onAddPlaceClick={onAddPlaceClick}
       />
 
-      <CardsElements cards={cards} onCardClick={onCardClick} onCardLike={handleCardLikeOrDisLike}/>
+      <CardsElements cards={cards} onCardClick={onCardClick} onPopupConfirmation={onConfirmation} onCardLike={handleCardLikeOrDisLike}/>
 
       <PopupWithForm
         title={"Editar Perfil"}
@@ -137,6 +140,8 @@ function handleCardLikeOrDisLike(card) {
         </Input>
       </PopupWithForm>
       <ImagePopup onClose={onClose} selectedCard={selectedCard} />
+
+      <ConfirmationPopup onClose={onClose} isOpen={confirmation} />
     </main>
   );
 }

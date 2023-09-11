@@ -1,7 +1,8 @@
 import React from "react";
 import Card from "./Card";
 
-function CardsElements({ cards, onCardClick, onCardLike }) {
+function CardsElements({ cards, onCardClick, onCardLike, onPopupConfirmation }) {
+
 
   return (
     <section className="card-elements">
@@ -15,6 +16,7 @@ function CardsElements({ cards, onCardClick, onCardLike }) {
             likes={card.likes}
             onCardClick={() => onCardClick(card)}
             onCardLike={() => onCardLike(card)}
+            onPopupConfirmation={()=> onPopupConfirmation(card) }
             owner={card.owner}
           />
         );

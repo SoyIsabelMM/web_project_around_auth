@@ -10,7 +10,7 @@ function PopupWithForm(props) {
       className={`${props.className} ${props.isOpen ? "open" : ""}`}
       id={props.id}
     >
-      <div className="popup__overlay"></div>
+      <div onClick={props.onClose} className="popup__overlay"></div>
       <div
         className={`${
           props.classNameModal ? props.classNameModal : "popup__container"

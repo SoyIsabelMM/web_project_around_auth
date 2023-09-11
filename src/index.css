@@ -65,6 +65,7 @@
 @import url(./blocks/url-change-error/url-change-error.css);
 @import url(./blocks/new-image-error/new-image-error.css);
 @import url(./blocks/modal/modal.css);
+@import url(./blocks/modal/__overlay.css);
 @import url(./blocks/modal/__container/modal__container.css);
 @import url(./blocks/modal/__container-close/modal__container-close.css);
 @import url(./blocks/modal/__image-card/modal__image-card.css);

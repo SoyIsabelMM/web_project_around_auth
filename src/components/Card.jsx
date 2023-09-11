@@ -4,7 +4,7 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 import { useContext } from "react";
 
 
-function Card({ name, link, likes, onCardClick, owner, onCardLike}) {
+function Card({ name, link, likes, onCardClick, owner, onCardLike, onPopupConfirmation}) {
   const handleClick = () => {
     onCardClick({ name, link });
   };
@@ -12,6 +12,11 @@ function Card({ name, link, likes, onCardClick, owner, onCardLike}) {
   const handleCardLike = () => {
     onCardLike();
   }
+
+  const handlePopupConfirmation = () => {
+    onPopupConfirmation();
+  } 
+
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -27,7 +32,7 @@ function Card({ name, link, likes, onCardClick, owner, onCardLike}) {
   
   return (
     <div className="card-elements__container">
-      <button className={cardDeleteBtnClassName}>
+      <button className={cardDeleteBtnClassName} onClick={handlePopupConfirmation}>
         <img
           className="card-elements__container-icon-delete"
           src={iconDelete}

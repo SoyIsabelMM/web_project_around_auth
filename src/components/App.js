@@ -12,7 +12,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(true);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(true);
   const [selectedCard, setSelectedCard] = useState(null);
-
+  const [confirmation, setConfirmation] = useState(null)
   const [currentUser, setCurrentUser] = useState(null);
   
 
@@ -46,11 +46,17 @@ function App() {
     setIsEditProfilePopupOpen(true);
     setIsAddPlacePopupOpen(true);
     setSelectedCard(false);
+    setConfirmation(false)
   };
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
+
+  const handleConfirmation = (card) => {
+  
+    setConfirmation(card)
+  }
 
   return (
     <div className="page">
@@ -66,6 +72,8 @@ function App() {
         onClose={closeAllPopups}
         onCardClick={handleCardClick}
         selectedCard={selectedCard}
+        confirmation={confirmation}
+        onConfirmation={handleConfirmation}
       />
       <Footer />
       </CurrentUserContext.Provider>
