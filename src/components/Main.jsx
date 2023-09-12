@@ -6,7 +6,7 @@ import api from "../utils/api";
 import CardsElements from "./CardsElements";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../context/CurrentUserContext";
-import ConfirmationPopup from "./ConfirmationPopup"
+// import ConfirmationPopup from "./ConfirmationPopup";
 
 function Main({
   onEditProfileClick,
@@ -18,38 +18,47 @@ function Main({
   onClose,
   onCardClick,
   selectedCard,
-  confirmation,
-  onConfirmation
+  // confirmation,
+  // onConfirmation,
 }) {
+  const currentUser = useContext(CurrentUserContext);
 
-const currentUser = useContext(CurrentUserContext);
+  const [cards, setCards] = useState([]);
 
-const [cards, setCards] = useState([]);
+  useEffect(() => {
+    api
+      .getCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-useEffect(() => {
-  api
-    .getCards()
-    .then((data) => {
-      setCards(data);
-    })
-    .catch((err) => {
-      console.log(err);
+  function handleCardLikeOrDisLike(card) {
+    const isLike = card.likes.some((i) => i._id === currentUser._id);
+
+    if (isLike) {
+      api.deleteLikeFromCard(card._id, isLike).then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      });
+    } else {
+      api.addLikeFromCard(card._id, !isLike).then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      });
+    }
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCardFromServer(card._id).then(() => {
+      setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
     });
-}, []);
-
-function handleCardLikeOrDisLike(card) {
-  const isLike = card.likes.some(i => i._id === currentUser._id);
-
- if (isLike) {
-  api.deleteLikeFromCard(card._id, isLike).then((newCard) => {
-    setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
-  });
- } else {
-  api.addLikeFromCard(card._id, !isLike).then((newCard) => {
-    setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
-  });
- }
-}
+  }
 
   return (
     <main className="content">
@@ -62,7 +71,13 @@ function handleCardLikeOrDisLike(card) {
         onAddPlaceClick={onAddPlaceClick}
       />
 
-      <CardsElements cards={cards} onCardClick={onCardClick} onPopupConfirmation={onConfirmation} onCardLike={handleCardLikeOrDisLike}/>
+      <CardsElements
+        cards={cards}
+        onCardClick={onCardClick}
+        // onPopupConfirmation={onConfirmation}
+        onCardLike={handleCardLikeOrDisLike}
+        onCardDelete={handleCardDelete}
+      />
 
       <PopupWithForm
         title={"Editar Perfil"}
@@ -141,7 +156,7 @@ function handleCardLikeOrDisLike(card) {
       </PopupWithForm>
       <ImagePopup onClose={onClose} selectedCard={selectedCard} />
 
-      <ConfirmationPopup onClose={onClose} isOpen={confirmation} />
+      {/* <ConfirmationPopup onClose={onClose} isOpen={confirmation} /> */}
     </main>
   );
 }

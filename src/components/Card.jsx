@@ -3,41 +3,56 @@ import btnLike from "../images/btn-like.png";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import { useContext } from "react";
 
-
-function Card({ name, link, likes, onCardClick, owner, onCardLike, onPopupConfirmation}) {
+function Card({
+  name,
+  link,
+  likes,
+  onCardClick,
+  owner,
+  onCardLike,
+  // onPopupConfirmation,
+  onCardDelete,
+}) {
   const handleClick = () => {
     onCardClick({ name, link });
   };
 
   const handleCardLike = () => {
     onCardLike();
-  }
+  };
 
-  const handlePopupConfirmation = () => {
-    onPopupConfirmation();
-  } 
+  // const handlePopupConfirmation = () => {
+  //   onPopupConfirmation();
+  // };
 
+  const handleDeleteClick = () => {
+    onCardDelete();
+  };
 
   const currentUser = useContext(CurrentUserContext);
 
   const isOwner = owner._id === currentUser?._id;
 
-  const isLike = Array.isArray(likes) && likes.some(i => i._id === currentUser?._id);
+  const isLike =
+    Array.isArray(likes) && likes.some((i) => i._id === currentUser?._id);
 
-  const cardDeleteBtnClassName = (`${isOwner ? "card-elements__container-btn-delete" : "inactive"}`);
+  const cardDeleteBtnClassName = `${
+    isOwner ? "card-elements__container-btn-delete" : "inactive"
+  }`;
 
-  const cardLikeBtnClassName = (`card-elements__container-footing-btn ${
-    isLike ? "card-elements__container-footing-btn_active" : "card-elements__container-footing-btn_inactive"
-  }`)
-  
+  const cardLikeBtnClassName = `card-elements__container-footing-btn ${
+    isLike
+      ? "card-elements__container-footing-btn_active"
+      : "card-elements__container-footing-btn_inactive"
+  }`;
+
   return (
     <div className="card-elements__container">
-      <button className={cardDeleteBtnClassName} onClick={handlePopupConfirmation}>
+      <button className={cardDeleteBtnClassName} onClick={handleDeleteClick}>
         <img
           className="card-elements__container-icon-delete"
           src={iconDelete}
           alt="icon eliminar imágen"
-
         />
       </button>
       <img
@@ -56,7 +71,7 @@ function Card({ name, link, likes, onCardClick, owner, onCardLike, onPopupConfir
         />
         {likes.length !== 0 && (
           <>
-            <span className="card-elements__like-counter"> {likes.length} </span>
+            <span className="card-elements__like-counter">{likes.length}</span>
           </>
         )}
       </div>

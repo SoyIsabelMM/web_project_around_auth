@@ -6,15 +6,13 @@ import "../index.css";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import api from "../utils/api";
 
-
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(true);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(true);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(true);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [confirmation, setConfirmation] = useState(null)
+  // const [confirmation, setConfirmation] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
-  
 
   useEffect(() => {
     api
@@ -26,8 +24,6 @@ function App() {
         console.log("Disculpa, se ha encontrado un error:", err);
       });
   }, []);
-
-
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(false);
@@ -46,36 +42,35 @@ function App() {
     setIsEditProfilePopupOpen(true);
     setIsAddPlacePopupOpen(true);
     setSelectedCard(false);
-    setConfirmation(false)
+    // setConfirmation(false);
   };
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
 
-  const handleConfirmation = (card) => {
-  
-    setConfirmation(card)
-  }
+  // const handleConfirmation = (card) => {
+  //   setConfirmation(card);
+  // };
 
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-      <Header />
-      <Main
-        onEditProfileClick={handleEditProfileClick}
-        onAddPlaceClick={handleAddPlaceClick}
-        onEditAvatarClick={handleEditAvatarClick}
-        isEditProfilePopupOpen={isEditProfilePopupOpen}
-        isAddPlacePopupOpen={isAddPlacePopupOpen}
-        isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-        onCardClick={handleCardClick}
-        selectedCard={selectedCard}
-        confirmation={confirmation}
-        onConfirmation={handleConfirmation}
-      />
-      <Footer />
+        <Header />
+        <Main
+          onEditProfileClick={handleEditProfileClick}
+          onAddPlaceClick={handleAddPlaceClick}
+          onEditAvatarClick={handleEditAvatarClick}
+          isEditProfilePopupOpen={isEditProfilePopupOpen}
+          isAddPlacePopupOpen={isAddPlacePopupOpen}
+          isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onCardClick={handleCardClick}
+          selectedCard={selectedCard}
+          // confirmation={confirmation}
+          // onConfirmation={handleConfirmation}
+        />
+        <Footer />
       </CurrentUserContext.Provider>
     </div>
   );

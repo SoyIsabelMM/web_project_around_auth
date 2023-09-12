@@ -1,9 +1,13 @@
 import React from "react";
 import Card from "./Card";
 
-function CardsElements({ cards, onCardClick, onCardLike, onPopupConfirmation }) {
-
-
+function CardsElements({
+  cards,
+  onCardClick,
+  onCardLike,
+  // onPopupConfirmation,
+  onCardDelete,
+}) {
   return (
     <section className="card-elements">
       {/* Here we will show all our cards  */}
@@ -16,7 +20,8 @@ function CardsElements({ cards, onCardClick, onCardLike, onPopupConfirmation }) 
             likes={card.likes}
             onCardClick={() => onCardClick(card)}
             onCardLike={() => onCardLike(card)}
-            onPopupConfirmation={()=> onPopupConfirmation(card) }
+            onCardDelete={() => onCardDelete(card)}
+            // onPopupConfirmation={() => onPopupConfirmation(card)}
             owner={card.owner}
           />
         );
