@@ -11,6 +11,7 @@ function Input(props) {
         minLength="2"
         maxLength={props.maxLength}
         required
+        onChange={props.onChange}
       />
       {props.children}
     </>

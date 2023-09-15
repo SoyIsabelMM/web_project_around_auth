@@ -26,6 +26,7 @@ class Api {
         "https://around.nomoreparties.co/v1/web_es_05/users/me",
         "GET"
       );
+
       return res;
     } catch (err) {
       console.log(err);

@@ -1,25 +1,29 @@
 import closeIcon from "../images/close-icon.png";
 
-function PopupWithForm(props) {
+function PopupWithForm({
+  className,
+  isOpen,
+  onClose,
+  classNameModal,
+  id,
+  children,
+  title,
+  nameBtn,
+  onSubmit,
+}) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    onSubmit();
+    onClose();
   };
 
   return (
-    <section
-      className={`${props.className} ${props.isOpen ? "open" : ""}`}
-      id={props.id}
-    >
-      <div onClick={props.onClose} className="popup__overlay"></div>
+    <section className={`${className} ${isOpen ? "open" : ""}`} id={id}>
+      <div onClick={onClose} className="popup__overlay"></div>
       <div
-        className={`${
-          props.classNameModal ? props.classNameModal : "popup__container"
-        }`}
+        className={`${classNameModal ? classNameModal : "popup__container"}`}
       >
-        <button
-          className="popup__container-close-popup"
-          onClick={props.onClose}
-        >
+        <button className="popup__container-close-popup" onClick={onClose}>
           <img
             src={closeIcon}
             alt="botón
@@ -28,17 +32,16 @@ function PopupWithForm(props) {
           />
         </button>
 
-        <h3 className="popup__container-text">{props.title}</h3>
-
-        {props.children}
+        <h3 className="popup__container-text">{title}</h3>
 
         <form
           className="popup__container-form"
           noValidate
           onSubmit={handleSubmit}
         >
+          {children}
           <button className="popup__container-save-btn" type="submit">
-            {props.name}
+            {nameBtn}
           </button>
         </form>
       </div>

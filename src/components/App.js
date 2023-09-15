@@ -53,6 +53,25 @@ function App() {
   //   setConfirmation(card);
   // };
 
+  const handleUpdateUser = (data) => {
+    api
+      .saveDataToServer(data.name, data.about)
+      .then((userData) => {
+        const updateUser = {
+          id: currentUser?._id,
+          name: userData.name,
+          about: userData.about,
+          avatar: userData.avatar,
+        };
+
+        setCurrentUser(updateUser);
+        setIsEditProfilePopupOpen(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -67,6 +86,7 @@ function App() {
           onClose={closeAllPopups}
           onCardClick={handleCardClick}
           selectedCard={selectedCard}
+          onUpdateUser={handleUpdateUser}
           // confirmation={confirmation}
           // onConfirmation={handleConfirmation}
         />

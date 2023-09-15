@@ -1,11 +1,12 @@
 import Profile from "./Profile";
-import PopupWithForm from "./PopupWithForm";
-import Input from "./Input";
 import { useContext, useEffect, useState } from "react";
 import api from "../utils/api";
 import CardsElements from "./CardsElements";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../context/CurrentUserContext";
+import EditProfilePopup from "./EditProfilePopup";
+import PopupWithForm from "./PopupWithForm";
+import Input from "./Input";
 // import ConfirmationPopup from "./ConfirmationPopup";
 
 function Main({
@@ -18,6 +19,7 @@ function Main({
   onClose,
   onCardClick,
   selectedCard,
+  onUpdateUser,
   // confirmation,
   // onConfirmation,
 }) {
@@ -79,40 +81,17 @@ function Main({
         onCardDelete={handleCardDelete}
       />
 
-      <PopupWithForm
-        title={"Editar Perfil"}
-        className="popup"
-        id="edit-profile-form"
-        name="Guardar"
+      <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
         onClose={onClose}
-      >
-        <Input
-          type="text"
-          className="popup__container-input"
-          placeholder="Nombre"
-          id="name"
-          maxLength="40"
-        >
-          <span className="popup__input-error name-error"></span>
-        </Input>
-
-        <Input
-          type="text"
-          className="popup__container-input"
-          placeholder="Profesión"
-          id="about-me"
-          maxLength="200"
-        >
-          <span className="popup__input-error name-error"></span>
-        </Input>
-      </PopupWithForm>
+        onUpdateUser={onUpdateUser}
+      />
 
       <PopupWithForm
         title={"Nuevo Lugar"}
         className="popup"
         id="add-picture-form"
-        name="Guardar"
+        nameBtn="Guardar"
         isOpen={isAddPlacePopupOpen}
         onClose={onClose}
       >
@@ -140,7 +119,7 @@ function Main({
         title={"Cambiar foto de perfil"}
         className="modal-window"
         id="change-profile"
-        name="Guardar"
+        nameBtn="Guardar"
         isOpen={isEditAvatarPopupOpen}
         onClose={onClose}
         classNameModal="modal-window__change-image"
