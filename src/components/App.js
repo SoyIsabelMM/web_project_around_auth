@@ -5,6 +5,8 @@ import Footer from "./Footer";
 import "../index.css";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import api from "../utils/api";
+import EditAvatarPopup from "./EditAvatarPopup";
+import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(true);
@@ -72,6 +74,28 @@ function App() {
       });
   };
 
+  const handleUpdateAvatar = (data) => {
+    console.log(data);
+    api
+      .updateAvatar(data)
+      .then((avatarUrl) => {
+        const updateAvatar = {
+          id: currentUser._id,
+          avatar: avatarUrl.avatar,
+          name: avatarUrl.name,
+          about: avatarUrl.about,
+        };
+
+        console.log(updateAvatar.avatar, "hellooooooooo");
+
+        setCurrentUser(updateAvatar);
+        setIsEditAvatarPopupOpen(true);
+      })
+      .catch((err) => {
+        console.log("No se ha actualizado el perfil:", err);
+      });
+  };
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -80,15 +104,24 @@ function App() {
           onEditProfileClick={handleEditProfileClick}
           onAddPlaceClick={handleAddPlaceClick}
           onEditAvatarClick={handleEditAvatarClick}
-          isEditProfilePopupOpen={isEditProfilePopupOpen}
           isAddPlacePopupOpen={isAddPlacePopupOpen}
-          isEditAvatarPopupOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onCardClick={handleCardClick}
           selectedCard={selectedCard}
-          onUpdateUser={handleUpdateUser}
           // confirmation={confirmation}
           // onConfirmation={handleConfirmation}
+        />
+
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
         />
         <Footer />
       </CurrentUserContext.Provider>

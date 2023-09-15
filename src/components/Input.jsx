@@ -1,19 +1,27 @@
 import React from "react";
 
-function Input(props) {
+function Input({
+  type,
+  className,
+  placeholder,
+  maxLength,
+  onChange,
+  children,
+  id,
+}) {
   return (
     <>
       <input
-        type={props.type}
-        className={props.className}
-        placeholder={props.placeholder}
-        id={props.id}
+        type={type}
+        className={className}
+        placeholder={placeholder}
+        id={id}
         minLength="2"
-        maxLength={props.maxLength}
+        maxLength={maxLength}
         required
-        onChange={props.onChange}
+        onChange={onChange}
       />
-      {props.children}
+      {children}
     </>
   );
 }

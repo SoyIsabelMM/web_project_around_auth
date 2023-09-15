@@ -4,7 +4,6 @@ import api from "../utils/api";
 import CardsElements from "./CardsElements";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../context/CurrentUserContext";
-import EditProfilePopup from "./EditProfilePopup";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
 // import ConfirmationPopup from "./ConfirmationPopup";
@@ -13,14 +12,10 @@ function Main({
   onEditProfileClick,
   onAddPlaceClick,
   onEditAvatarClick,
-  isEditProfilePopupOpen,
   isAddPlacePopupOpen,
-  isEditAvatarPopupOpen,
   onClose,
   onCardClick,
   selectedCard,
-  onUpdateUser,
-  // confirmation,
   // onConfirmation,
 }) {
   const currentUser = useContext(CurrentUserContext);
@@ -81,12 +76,6 @@ function Main({
         onCardDelete={handleCardDelete}
       />
 
-      <EditProfilePopup
-        isOpen={isEditProfilePopupOpen}
-        onClose={onClose}
-        onUpdateUser={onUpdateUser}
-      />
-
       <PopupWithForm
         title={"Nuevo Lugar"}
         className="popup"
@@ -112,25 +101,6 @@ function Main({
           id="new-image"
         >
           <span className="popup__input-error name-error"></span>
-        </Input>
-      </PopupWithForm>
-
-      <PopupWithForm
-        title={"Cambiar foto de perfil"}
-        className="modal-window"
-        id="change-profile"
-        nameBtn="Guardar"
-        isOpen={isEditAvatarPopupOpen}
-        onClose={onClose}
-        classNameModal="modal-window__change-image"
-      >
-        <Input
-          type="url"
-          className="modal-window__input-url-change"
-          placeholder="Título"
-          id="url-change"
-        >
-          <span className="url-change-error"></span>
         </Input>
       </PopupWithForm>
       <ImagePopup onClose={onClose} selectedCard={selectedCard} />

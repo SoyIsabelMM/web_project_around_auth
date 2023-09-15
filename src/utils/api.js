@@ -119,15 +119,19 @@ class Api {
 
   async updateAvatar(avatarUrl) {
     try {
-      const res = await this._useFetch(
-        "https://around.nomoreparties.co/v1/web_es_05/users/me/avatar",
-        "PATCH",
-        {
-          avatar: avatarUrl,
-        }
-      );
+      if (typeof avatarUrl === "string" && /^https?:\/\/\S+$/.test(avatarUrl)) {
+        const res = await this._useFetch(
+          "https://around.nomoreparties.co/v1/web_es_05/users/me/avatar",
+          "PATCH",
+          {
+            avatar: avatarUrl,
+          }
+        );
 
-      return res;
+        return res;
+      } else {
+        throw new Error("La URL del avatar no es válida");
+      }
     } catch (err) {
       console.log(err);
     }
