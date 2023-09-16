@@ -5,8 +5,8 @@ function CardsElements({
   cards,
   onCardClick,
   onCardLike,
-  // onPopupConfirmation,
-  onCardDelete,
+  onPopupConfirmation,
+  // onCardDelete,
 }) {
   return (
     <section className="card-elements">
@@ -20,8 +20,8 @@ function CardsElements({
             likes={card.likes}
             onCardClick={() => onCardClick(card)}
             onCardLike={() => onCardLike(card)}
-            onCardDelete={() => onCardDelete(card)}
-            // onPopupConfirmation={() => onPopupConfirmation(card)}
+            // onCardDelete={() => onCardDelete(card)}
+            onPopupConfirmation={() => onPopupConfirmation(card)}
             owner={card.owner}
           />
         );

@@ -6,7 +6,6 @@ import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
-// import ConfirmationPopup from "./ConfirmationPopup";
 
 function Main({
   onEditProfileClick,
@@ -16,7 +15,7 @@ function Main({
   onClose,
   onCardClick,
   selectedCard,
-  // onConfirmation,
+  onConfirmation,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -45,11 +44,11 @@ function Main({
     });
   }
 
-  function handleCardDelete(card) {
-    api.deleteCardFromServer(card._id).then(() => {
-      setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
-    });
-  }
+  // function handleCardDelete(card) {
+  //   api.deleteCardFromServer(card._id).then(() => {
+  //     setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
+  //   });
+  // }
 
   return (
     <main className="content">
@@ -65,9 +64,9 @@ function Main({
       <CardsElements
         cards={cards}
         onCardClick={onCardClick}
-        // onPopupConfirmation={onConfirmation}
+        onPopupConfirmation={onConfirmation}
         onCardLike={handleCardLikeOrDisLike}
-        onCardDelete={handleCardDelete}
+        // onCardDelete={handleCardDelete}
       />
 
       <PopupWithForm
@@ -98,8 +97,6 @@ function Main({
         </Input>
       </PopupWithForm>
       <ImagePopup onClose={onClose} selectedCard={selectedCard} />
-
-      {/* <ConfirmationPopup onClose={onClose} isOpen={confirmation} /> */}
     </main>
   );
 }

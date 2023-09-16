@@ -10,8 +10,8 @@ function Card({
   onCardClick,
   owner,
   onCardLike,
-  // onPopupConfirmation,
-  onCardDelete,
+  onPopupConfirmation,
+  // onCardDelete,
 }) {
   const handleClick = () => {
     onCardClick({ name, link });
@@ -21,13 +21,13 @@ function Card({
     onCardLike();
   };
 
-  // const handlePopupConfirmation = () => {
-  //   onPopupConfirmation();
-  // };
-
-  const handleDeleteClick = () => {
-    onCardDelete();
+  const handlePopupConfirmation = () => {
+    onPopupConfirmation();
   };
+
+  // const handleDeleteClick = () => {
+  //   onCardDelete();
+  // };
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -48,7 +48,10 @@ function Card({
 
   return (
     <div className="card-elements__container">
-      <button className={cardDeleteBtnClassName} onClick={handleDeleteClick}>
+      <button
+        className={cardDeleteBtnClassName}
+        onClick={handlePopupConfirmation}
+      >
         <img
           className="card-elements__container-icon-delete"
           src={iconDelete}

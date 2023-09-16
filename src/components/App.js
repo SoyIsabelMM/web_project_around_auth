@@ -7,13 +7,14 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 import api from "../utils/api";
 import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
+import ConfirmationPopup from "./ConfirmationPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(true);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(true);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(true);
   const [selectedCard, setSelectedCard] = useState(null);
-  // const [confirmation, setConfirmation] = useState(null);
+  const [confirmation, setConfirmation] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -44,16 +45,16 @@ function App() {
     setIsEditProfilePopupOpen(true);
     setIsAddPlacePopupOpen(true);
     setSelectedCard(false);
-    // setConfirmation(false);
+    setConfirmation(false);
   };
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
 
-  // const handleConfirmation = (card) => {
-  //   setConfirmation(card);
-  // };
+  const handleConfirmation = (card) => {
+    setConfirmation(card);
+  };
 
   const handleUpdateUser = async (data) => {
     api
@@ -104,8 +105,8 @@ function App() {
           onClose={closeAllPopups}
           onCardClick={handleCardClick}
           selectedCard={selectedCard}
-          // confirmation={confirmation}
-          // onConfirmation={handleConfirmation}
+          confirmation={confirmation}
+          onConfirmation={handleConfirmation}
         />
 
         <EditProfilePopup
@@ -119,6 +120,9 @@ function App() {
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
+
+        <ConfirmationPopup onClose={closeAllPopups} isOpen={confirmation} />
+
         <Footer />
       </CurrentUserContext.Provider>
     </div>

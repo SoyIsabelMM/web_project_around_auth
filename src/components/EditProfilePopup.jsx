@@ -26,8 +26,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   const handleClose = () => {
     onClose();
-    // setDescription(null);
-    // setName(null);
   };
 
   return (
