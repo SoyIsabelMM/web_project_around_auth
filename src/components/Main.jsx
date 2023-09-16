@@ -36,19 +36,13 @@ function Main({
   function handleCardLikeOrDisLike(card) {
     const isLike = card.likes.some((i) => i._id === currentUser._id);
 
-    if (isLike) {
-      api.deleteLikeFromCard(card._id, isLike).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
-    } else {
-      api.addLikeFromCard(card._id, !isLike).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
-    }
+    let apiRequest = isLike
+      ? api.deleteLikeFromCard(card._id, isLike)
+      : api.addLikeFromCard(card._id, !isLike);
+
+    apiRequest.then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
   }
 
   function handleCardDelete(card) {

@@ -55,7 +55,7 @@ function App() {
   //   setConfirmation(card);
   // };
 
-  const handleUpdateUser = (data) => {
+  const handleUpdateUser = async (data) => {
     api
       .saveDataToServer(data.name, data.about)
       .then((userData) => {
@@ -74,8 +74,7 @@ function App() {
       });
   };
 
-  const handleUpdateAvatar = (data) => {
-    console.log(data);
+  const handleUpdateAvatar = async (data) => {
     api
       .updateAvatar(data)
       .then((avatarUrl) => {
@@ -85,9 +84,6 @@ function App() {
           name: avatarUrl.name,
           about: avatarUrl.about,
         };
-
-        console.log(updateAvatar.avatar, "hellooooooooo");
-
         setCurrentUser(updateAvatar);
         setIsEditAvatarPopupOpen(true);
       })

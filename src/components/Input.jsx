@@ -8,6 +8,7 @@ function Input({
   onChange,
   children,
   id,
+  value,
 }) {
   return (
     <>
@@ -20,6 +21,7 @@ function Input({
         maxLength={maxLength}
         required
         onChange={onChange}
+        value={value}
       />
       {children}
     </>

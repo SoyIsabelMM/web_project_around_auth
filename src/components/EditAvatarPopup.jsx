@@ -1,28 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import PopupWithForm from "./PopupWithForm";
-import { CurrentUserContext } from "../context/CurrentUserContext";
 import Input from "./Input";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const currentUser = useContext(CurrentUserContext);
-
   const [avatar, setAvatar] = useState("");
-
-  useEffect(() => {
-    if (currentUser) {
-      setAvatar(currentUser.avatar);
-    }
-  }, [currentUser]);
 
   const handleChangeAvatar = (evt) => {
     setAvatar(evt.target.value);
   };
 
   const handleSubmit = () => {
-    onUpdateAvatar({
-      avatar: currentUser.avatar,
+    onUpdateAvatar(avatar).then(() => {
+      setAvatar("");
     });
-    console.log("hola");
   };
 
   return (
