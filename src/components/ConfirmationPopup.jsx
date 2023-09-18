@@ -1,7 +1,12 @@
 import React from "react";
 import closeIcon from "../images/close-icon.png";
 
-function ConfirmationPopup({ isOpen, onClose }) {
+function ConfirmationPopup({ isOpen, onClose, onConfirm }) {
+  const handleDelete = (card) => {
+    onConfirm(card);
+    onClose();
+  };
+
   return (
     <section className={` modal-window ${isOpen ? "" : "open"}`}>
       <div onClick={onClose} className="modal-window__overlay"></div>
@@ -15,7 +20,11 @@ function ConfirmationPopup({ isOpen, onClose }) {
         />
         <div className="modal-window__form-delete-card">
           <h3 className="modal-window__modal-title">¿Estás seguro?</h3>
-          <button className="modal-window__btn-delete" type="submit">
+          <button
+            className="modal-window__btn-delete"
+            type="submit"
+            onClick={handleDelete}
+          >
             Si
           </button>
         </div>

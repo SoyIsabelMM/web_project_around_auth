@@ -1,8 +1,6 @@
 import Profile from "./Profile";
-import { useContext, useEffect, useState } from "react";
-import api from "../utils/api";
+import { useContext } from "react";
 import CardsElements from "./CardsElements";
-import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
@@ -11,44 +9,14 @@ function Main({
   onEditProfileClick,
   onAddPlaceClick,
   onEditAvatarClick,
-  isAddPlacePopupOpen,
   onClose,
   onCardClick,
-  selectedCard,
-  onConfirmation,
+  onCardLike,
+  onCardDelete,
+  isAddPlacePopupOpen,
+  cards,
 }) {
   const currentUser = useContext(CurrentUserContext);
-
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api
-      .getCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  function handleCardLikeOrDisLike(card) {
-    const isLike = card.likes.some((i) => i._id === currentUser._id);
-
-    let apiRequest = isLike
-      ? api.deleteLikeFromCard(card._id, isLike)
-      : api.addLikeFromCard(card._id, !isLike);
-
-    apiRequest.then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
-  }
-
-  // function handleCardDelete(card) {
-  //   api.deleteCardFromServer(card._id).then(() => {
-  //     setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
-  //   });
-  // }
 
   return (
     <main className="content">
@@ -64,9 +32,8 @@ function Main({
       <CardsElements
         cards={cards}
         onCardClick={onCardClick}
-        onPopupConfirmation={onConfirmation}
-        onCardLike={handleCardLikeOrDisLike}
-        // onCardDelete={handleCardDelete}
+        onPopupConfirmation={onCardDelete}
+        onCardLike={onCardLike}
       />
 
       <PopupWithForm
@@ -96,7 +63,6 @@ function Main({
           <span className="popup__input-error name-error"></span>
         </Input>
       </PopupWithForm>
-      <ImagePopup onClose={onClose} selectedCard={selectedCard} />
     </main>
   );
 }

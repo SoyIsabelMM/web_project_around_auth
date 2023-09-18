@@ -8,14 +8,23 @@ import api from "../utils/api";
 import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import ConfirmationPopup from "./ConfirmationPopup";
+import ImagePopup from "./ImagePopup";
 
 function App() {
+  //** Manejo de estado de los Popups (abrir o cerrar) valor inicial: Cerrado "true"*/
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(true);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(true);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(true);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [confirmation, setConfirmation] = useState(null);
+
+  //**Manejo de estado de la data del usuario */
   const [currentUser, setCurrentUser] = useState(null);
+
+  const [cards, setCards] = useState([]);
+
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const [confirmation, setConfirmation] = useState(null);
+  const [cardToDelete, setCardToDelete] = useState(null);
 
   useEffect(() => {
     api
@@ -25,6 +34,15 @@ function App() {
       })
       .catch((err) => {
         console.log("Disculpa, se ha encontrado un error:", err);
+      });
+
+    api
+      .getCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
@@ -40,20 +58,13 @@ function App() {
     setIsAddPlacePopupOpen(false);
   };
 
-  const closeAllPopups = () => {
-    setIsEditAvatarPopupOpen(true);
-    setIsEditProfilePopupOpen(true);
-    setIsAddPlacePopupOpen(true);
-    setSelectedCard(false);
-    setConfirmation(false);
-  };
-
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
 
-  const handleConfirmation = (card) => {
-    setConfirmation(card);
+  const handleOpenConfirmation = (card) => {
+    setCardToDelete(card);
+    setConfirmation(true);
   };
 
   const handleUpdateUser = async (data) => {
@@ -93,6 +104,34 @@ function App() {
       });
   };
 
+  function handleCardLikeOrDisLike(card) {
+    const isLike = card.likes.some((i) => i._id === currentUser._id);
+
+    let apiRequest = isLike
+      ? api.deleteLikeFromCard(card._id, isLike)
+      : api.addLikeFromCard(card._id, !isLike);
+
+    apiRequest.then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
+  }
+
+  async function handleCardDelete() {
+    const isCard = cardToDelete._id;
+    api.deleteCardFromServer(isCard).then(() => {
+      setCards((prevCards) => prevCards.filter((c) => c._id !== isCard));
+    });
+  }
+
+  const closeAllPopups = () => {
+    setIsEditAvatarPopupOpen(true);
+    setIsEditProfilePopupOpen(true);
+    setIsAddPlacePopupOpen(true);
+    setSelectedCard(false);
+    setConfirmation(false);
+    setCardToDelete(null);
+  };
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -101,12 +140,12 @@ function App() {
           onEditProfileClick={handleEditProfileClick}
           onAddPlaceClick={handleAddPlaceClick}
           onEditAvatarClick={handleEditAvatarClick}
-          isAddPlacePopupOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onCardClick={handleCardClick}
-          selectedCard={selectedCard}
-          confirmation={confirmation}
-          onConfirmation={handleConfirmation}
+          onCardLike={handleCardLikeOrDisLike}
+          onCardDelete={handleOpenConfirmation}
+          isAddPlacePopupOpen={isAddPlacePopupOpen}
+          cards={cards}
         />
 
         <EditProfilePopup
@@ -121,7 +160,13 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
         />
 
-        <ConfirmationPopup onClose={closeAllPopups} isOpen={confirmation} />
+        <ConfirmationPopup
+          onClose={closeAllPopups}
+          isOpen={confirmation}
+          onConfirm={handleCardDelete}
+        />
+
+        <ImagePopup onClose={closeAllPopups} selectedCard={selectedCard} />
 
         <Footer />
       </CurrentUserContext.Provider>

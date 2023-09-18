@@ -10,8 +10,7 @@ function Card({
   onCardClick,
   owner,
   onCardLike,
-  onPopupConfirmation,
-  // onCardDelete,
+  onCardDelete,
 }) {
   const handleClick = () => {
     onCardClick({ name, link });
@@ -22,12 +21,8 @@ function Card({
   };
 
   const handlePopupConfirmation = () => {
-    onPopupConfirmation();
+    onCardDelete();
   };
-
-  // const handleDeleteClick = () => {
-  //   onCardDelete();
-  // };
 
   const currentUser = useContext(CurrentUserContext);
 
