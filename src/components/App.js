@@ -9,6 +9,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import ConfirmationPopup from "./ConfirmationPopup";
 import ImagePopup from "./ImagePopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   //** Manejo de estado de los Popups (abrir o cerrar) valor inicial: Cerrado "true"*/
@@ -123,6 +124,18 @@ function App() {
     });
   }
 
+  const handleAddPlaceSubmit = async (newPlaceData) => {
+    api
+      .addNewCardToServer(newPlaceData.name, newPlaceData.link)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        setIsAddPlacePopupOpen(true);
+      })
+      .catch((err) => {
+        console.log("Ha ocurrido un error al cargar la nueva imágen:", err);
+      });
+  };
+
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(true);
     setIsEditProfilePopupOpen(true);
@@ -140,11 +153,9 @@ function App() {
           onEditProfileClick={handleEditProfileClick}
           onAddPlaceClick={handleAddPlaceClick}
           onEditAvatarClick={handleEditAvatarClick}
-          onClose={closeAllPopups}
           onCardClick={handleCardClick}
           onCardLike={handleCardLikeOrDisLike}
           onCardDelete={handleOpenConfirmation}
-          isAddPlacePopupOpen={isAddPlacePopupOpen}
           cards={cards}
         />
 
@@ -158,6 +169,12 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+        />
+
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlaceSubmit={handleAddPlaceSubmit}
         />
 
         <ConfirmationPopup
