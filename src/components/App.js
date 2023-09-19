@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
+import Header from "./Header.js";
+import Main from "./Main.js";
+import Footer from "./Footer.js";
 import "../index.css";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import api from "../utils/api";
-import EditAvatarPopup from "./EditAvatarPopup";
-import EditProfilePopup from "./EditProfilePopup";
-import ConfirmationPopup from "./ConfirmationPopup";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import api from "../utils/api.js";
+import EditAvatarPopup from "./EditAvatarPopup.js";
+import EditProfilePopup from "./EditProfilePopup.js";
+import ConfirmationPopup from "./ConfirmationPopup.js";
 import ImagePopup from "./ImagePopup";
-import AddPlacePopup from "./AddPlacePopup";
+import AddPlacePopup from "./AddPlacePopup.js";
 
 function App() {
   //** Manejo de estado de los Popups (abrir o cerrar) valor inicial: Cerrado "true"*/

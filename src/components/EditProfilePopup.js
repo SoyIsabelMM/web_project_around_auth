@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PopupWithForm from "./PopupWithForm";
-import Input from "./Input";
+import PopupWithForm from "./PopupWithForm.js";
+import Input from "./Input.js";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = useState("");

@@ -1,7 +1,7 @@
 import Profile from "./Profile";
 import { useContext } from "react";
-import CardsElements from "./CardsElements";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import CardsElements from "./CardsElements.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Main({
   onEditProfileClick,

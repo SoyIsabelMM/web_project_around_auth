@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PopupWithForm from "./PopupWithForm";
-import Input from "./Input";
+import PopupWithForm from "./PopupWithForm.js";
+import Input from "./Input.js";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
   const [placeName, setPlaceName] = useState("");

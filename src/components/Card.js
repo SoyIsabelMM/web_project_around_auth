@@ -1,6 +1,6 @@
 import iconDelete from "../images/icon-delete.png";
 import btnLike from "../images/btn-like.png";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { useContext } from "react";
 
 function Card({
