@@ -1,7 +1,7 @@
 import Profile from "./Profile";
 import { useContext } from "react";
-import CardsElements from "./CardsElements.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import Card from "./Card.js";
 
 function Main({
   onEditProfileClick,
@@ -25,12 +25,23 @@ function Main({
         onAddPlaceClick={onAddPlaceClick}
       />
 
-      <CardsElements
-        cards={cards}
-        onCardClick={onCardClick}
-        onPopupConfirmation={onCardDelete}
-        onCardLike={onCardLike}
-      />
+      <section className="card-elements">
+        {/* Here we will show all our cards  */}
+        {cards.map((card) => {
+          return (
+            <Card
+              key={card._id}
+              name={card.name}
+              link={card.link}
+              likes={card.likes}
+              onCardClick={() => onCardClick(card)}
+              onCardLike={() => onCardLike(card)}
+              onCardDelete={() => onCardDelete(card)}
+              owner={card.owner}
+            />
+          );
+        })}
+      </section>
     </main>
   );
 }
