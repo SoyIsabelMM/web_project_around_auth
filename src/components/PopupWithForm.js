@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import closeIcon from "../images/close-icon.png";
 
 function PopupWithForm({
@@ -14,8 +15,21 @@ function PopupWithForm({
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSubmit();
-    onClose();
   };
+
+  useEffect(() => {
+    const handleKeyDown = (evt) => {
+      if (evt.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   return (
     <section className={`${className} ${isOpen ? "open" : ""}`} id={id}>

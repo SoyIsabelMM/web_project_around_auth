@@ -9,9 +9,27 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     setAvatar(evt.target.value);
   };
 
+  const handleCleanInputOnClose = () => {
+    onClose();
+    setAvatar("");
+  };
+
   const handleSubmit = () => {
+    if (!avatar) {
+      alert("Campo requerido");
+      return;
+    }
+
+    const imageRegex = /\.(jpeg|jpg|gif|png|bmp|svg|webp)$/i;
+
+    if (!imageRegex.test(avatar)) {
+      alert("La URL no es una URL de imagen válida");
+      return;
+    }
+
     onUpdateAvatar(avatar).then(() => {
       setAvatar("");
+      onClose();
     });
   };
 
@@ -23,7 +41,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         id="change-profile"
         nameBtn="Guardar"
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={handleCleanInputOnClose}
         onSubmit={handleSubmit}
         classNameModal="modal-window__change-image"
       >

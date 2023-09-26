@@ -73,7 +73,7 @@ function App() {
       .saveDataToServer(data.name, data.about)
       .then((userData) => {
         const updateUser = {
-          id: currentUser?._id,
+          ...currentUser,
           name: userData.name,
           about: userData.about,
           avatar: userData.avatar,
@@ -92,7 +92,7 @@ function App() {
       .updateAvatar(data)
       .then((avatarUrl) => {
         const updateAvatar = {
-          id: currentUser._id,
+          ...currentUser,
           avatar: avatarUrl.avatar,
           name: avatarUrl.name,
           about: avatarUrl.about,
