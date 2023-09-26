@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import PopupWithForm from "./PopupWithForm.js";
-import Input from "./Input.js";
+import React, { useContext, useState } from "react";
+import PopupWithForm from "./PopupWithForm";
+import Input from "./Input";
+import { CurrentUserContext } from "../context/CurrentUserContext";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const currentUser = useContext(CurrentUserContext);
+
+  const [name, setName] = useState(currentUser?.name);
+  const [description, setDescription] = useState(currentUser?.about);
 
   const handleNameChange = (evt) => {
     setName(evt.target.value);
@@ -15,17 +18,17 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   };
 
   const handleSubmit = () => {
+    if (!name || !description) {
+      alert("Nombre y Profesión Requerido");
+      return;
+    }
+
     onUpdateUser({
       name: name,
       about: description,
     }).then(() => {
-      setName("");
-      setDescription("");
+      onClose();
     });
-  };
-
-  const handleClose = () => {
-    onClose();
   };
 
   return (
@@ -36,7 +39,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         id="edit-profile-form"
         nameBtn="Editar"
         isOpen={isOpen}
-        onClose={handleClose}
+        onClose={onClose}
         onSubmit={handleSubmit}
       >
         <Input

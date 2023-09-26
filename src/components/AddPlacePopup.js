@@ -14,13 +14,32 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
     setPlaceLink(evt.target.value);
   };
 
+  const handleCleanInputOnClose = () => {
+    onClose();
+    setPlaceLink("");
+    setPlaceName("");
+  };
+
   const handleSubmit = () => {
+    if (!placeName || !placeLink) {
+      alert("Campo requerido");
+      return;
+    }
+
+    const imageRegex = /\.(jpeg|jpg|gif|png|bmp|svg|webp)$/i;
+
+    if (!imageRegex.test(placeLink)) {
+      alert("La URL no es una URL de imagen válida");
+      return;
+    }
+
     onAddPlaceSubmit({
       name: placeName,
       link: placeLink,
     }).then(() => {
       setPlaceName("");
       setPlaceLink("");
+      onClose();
     });
   };
   return (
@@ -30,7 +49,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
       id="add-picture-form"
       nameBtn="Guardar"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={handleCleanInputOnClose}
       onSubmit={handleSubmit}
     >
       <Input
