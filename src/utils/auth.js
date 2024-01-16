@@ -1,6 +1,6 @@
 const BASE_URL = "https://register.nomoreparties.co";
 
-export const singup = (username, password, email) => {
+export const register = (username, password, email) => {
   return fetch(`${BASE_URL}/singup`, {
     method: "POST",
     headers: {
@@ -21,12 +21,18 @@ export const singup = (username, password, email) => {
     });
 };
 
-export const singin = (email, password) => {
+export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/singin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  });
+  })
+    .then((response) => {
+      response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

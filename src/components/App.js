@@ -10,6 +10,9 @@ import EditProfilePopup from "./EditProfilePopup.js";
 import ConfirmationPopup from "./ConfirmationPopup.js";
 import ImagePopup from "./ImagePopup";
 import AddPlacePopup from "./AddPlacePopup.js";
+import { Routes, Route } from "react-router-dom";
+import Login from "./Login.jsx";
+import Register from "./Register.jsx";
 
 function App() {
   //** Manejo de estado de los Popups (abrir o cerrar) valor inicial: Cerrado "true"*/
@@ -149,16 +152,24 @@ function App() {
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        <Main
-          onEditProfileClick={handleEditProfileClick}
-          onAddPlaceClick={handleAddPlaceClick}
-          onEditAvatarClick={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLikeOrDisLike}
-          onCardDelete={handleOpenConfirmation}
-          cards={cards}
-        />
-
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main
+                onEditProfileClick={handleEditProfileClick}
+                onAddPlaceClick={handleAddPlaceClick}
+                onEditAvatarClick={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLikeOrDisLike}
+                onCardDelete={handleOpenConfirmation}
+                cards={cards}
+              />
+            }
+          />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login />} />
+        </Routes>
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
