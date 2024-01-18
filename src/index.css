@@ -17,6 +17,14 @@
 @import url(./blocks/profile/__add-btn/profile__add-btn.css);
 @import url(./blocks/profile/__add-btn-image/profile__add-btn-image.css);
 
+@import url(./blocks/title/title.css);
+
+@import url(./blocks/authenticate/authenticate.css);
+@import url(./blocks/authenticate/__btn/authenticate__btn.css);
+@import url(./blocks/authenticate/__form/authenticate__form.css);
+@import url(./blocks/authenticate/__input/authenticate__input.css);
+@import url(./blocks/authenticate/__register/authenticate__register.css);
+
 @import url(./blocks/inactive/inactive.css);
 
 @import url(./blocks/card-elements/card-elements.css);

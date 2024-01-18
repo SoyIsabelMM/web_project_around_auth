@@ -167,8 +167,16 @@ function App() {
               />
             }
           />
-          <Route path="/signup" element={<Register />} />
-          <Route path="/signin" element={<Login />} />
+          <Route
+            path="/signup"
+            element={<Register title={"Regístrate"} nameBtn={"Regístrate"} />}
+          />
+          <Route
+            path="/signin"
+            element={
+              <Login title={"Inicia sesión"} nameBtn={"Inicia sesión"} />
+            }
+          />
         </Routes>
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
