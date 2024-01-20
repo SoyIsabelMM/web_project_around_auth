@@ -23,6 +23,9 @@
 @import url(./blocks/authenticate/__input/authenticate__input.css);
 @import url(./blocks/authenticate/__register/authenticate__register.css);
 
+@import url(./blocks/link/link.css);
+@import url(./blocks/link/__auth/link__auth.css);
+
 @import url(./blocks/inactive/inactive.css);
 
 @import url(./blocks/card-elements/card-elements.css);
