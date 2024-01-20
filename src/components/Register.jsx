@@ -8,7 +8,7 @@ function Register({ title, onSubmit, nameBtn }) {
   };
   return (
     <section className="authenticate" id="register">
-      <h2 className="title">{title}</h2>
+      <h3 className="title">{title}</h3>
       <form className="authenticate__form" noValidate onSubmit={handleSubmit}>
         <Input
           className={"authenticate__input"}

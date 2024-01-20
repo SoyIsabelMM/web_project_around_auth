@@ -17,8 +17,6 @@
 @import url(./blocks/profile/__add-btn/profile__add-btn.css);
 @import url(./blocks/profile/__add-btn-image/profile__add-btn-image.css);
 
-@import url(./blocks/title/title.css);
-
 @import url(./blocks/authenticate/authenticate.css);
 @import url(./blocks/authenticate/__btn/authenticate__btn.css);
 @import url(./blocks/authenticate/__form/authenticate__form.css);
@@ -43,6 +41,10 @@
 @import url(./blocks/footer/__copyright/footer__copyright.css);
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/open/open.css);
+
+@import url(./blocks/access/access.css);
+@import url(./blocks/denied/denied.css);
+
 @import url(./blocks/modal-window/__container/modal-window__container.css);
 @import url(./blocks/modal-window/__overlay/modal-window__overlay.css);
 @import url(./blocks/modal-window/__btn-close/modal-window__btn-close.css);
@@ -56,8 +58,13 @@
 @import url(./blocks/modal-window/__input-url-change/modal-window__input-url-change.css);
 @import url(./blocks/modal-window/__keep-btn/modal-window__keep-btn.css);
 @import url(./blocks/popup/__overlay/popup__overlay.css);
+
+@import url(./blocks/title/title.css);
+@import url(./blocks/title/_justify/title_justify.css);
+
 @import url(./blocks/popup/__container/popup__container.css);
 @import url(./blocks/popup/__container-close-popup/popup__container-close-popup.css);
+@import url(./blocks/popup/__container-close-popup/_position/popup__container-close-popup_position.css);
 @import url(./blocks/popup/__container-close-icon/popup__container-close-icon.css);
 @import url(./blocks/popup/__container-text/popup__container-text.css);
 @import url(./blocks/popup/__container-form/popup__container-form.css);

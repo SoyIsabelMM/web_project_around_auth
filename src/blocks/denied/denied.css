@@ -1,0 +1,14 @@
+.denied {
+  position: relative;
+  border-radius: 10px;
+  left: auto;
+  right: auto;
+  z-index: 10;
+  background: #ffffff;
+  width: 430px;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

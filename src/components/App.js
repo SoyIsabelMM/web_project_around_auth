@@ -13,6 +13,7 @@ import AddPlacePopup from "./AddPlacePopup.js";
 import { Routes, Route } from "react-router-dom";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
+import InfoTooltip from "./InfoTooltip.jsx";
 
 function App() {
   //** Manejo de estado de los Popups (abrir o cerrar) valor inicial: Cerrado "true"*/
@@ -143,6 +144,7 @@ function App() {
     setIsEditAvatarPopupOpen(true);
     setIsEditProfilePopupOpen(true);
     setIsAddPlacePopupOpen(true);
+
     setSelectedCard(false);
     setConfirmation(false);
     setCardToDelete(null);
@@ -178,6 +180,7 @@ function App() {
             }
           />
         </Routes>
+        <InfoTooltip />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
