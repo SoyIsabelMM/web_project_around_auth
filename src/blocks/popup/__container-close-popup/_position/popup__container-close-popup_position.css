@@ -1,5 +1,11 @@
 .popup__container-close-popup_position {
-  position: fixed;
-  top: 250px;
-  left: 820px;
+  top: 22%;
+  left: 65%;
+}
+
+@media screen and (max-width: 1200px) {
+  .popup__container-close-popup_position {
+    top: 25%;
+    left: 69%;
+  }
 }
