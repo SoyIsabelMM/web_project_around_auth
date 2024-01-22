@@ -4,6 +4,7 @@
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/_menu-open/header_menu-open.css);
 @import url(./blocks/header/__logo-header/header__logo-header.css);
+@import url(./blocks/header/__logo-header/_size/header__logo-header_size.css);
 @import url(./blocks/header/__close-btn/header__close-btn.css);
 @import url(./blocks/header/__nav-bar/header__nav-bar.css);
 @import url(./blocks/header/__email/header__email.css);
@@ -32,6 +33,7 @@
 
 @import url(./blocks/link/link.css);
 @import url(./blocks/link/__auth/link__auth.css);
+@import url(./blocks/link/__auth/_size/link__auth_size.css);
 
 @import url(./blocks/inactive/inactive.css);
 

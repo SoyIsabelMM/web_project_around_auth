@@ -12,3 +12,23 @@
   align-items: center;
   justify-content: center;
 }
+
+@media screen and (min-width: 320px) and (max-width: 898px) {
+  .access {
+    width: 280px;
+    height: 308px;
+    top: 23%;
+  }
+}
+
+@media screen and (min-width: 899px) and (max-width: 1200px) {
+  .access {
+    top: 7%;
+  }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1600px) {
+  .access {
+    top: -4%;
+  }
+}

@@ -14,7 +14,7 @@ function Header({ email, signOut }) {
     <>
       <header className={`header ${open ? "header_menu-open" : ""}`}>
         <img
-          className="header__logo-header"
+          className="header__logo-header header__logo-header_size"
           src={logo}
           alt="Logo Around, alrededor
         de los estados unidos"
@@ -26,7 +26,7 @@ function Header({ email, signOut }) {
         )}
 
         {useMatch("/signup") && (
-          <Link to="/signin" className="link link__auth">
+          <Link to="/signin" className="link link__auth link__auth_size">
             Iniciar Sesión
           </Link>
         )}

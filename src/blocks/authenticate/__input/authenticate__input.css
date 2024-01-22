@@ -14,3 +14,10 @@
 .authenticate__input:focus {
   outline: none;
 }
+
+@media screen and (min-width: 320px) and (max-width: 898px) {
+  .authenticate__input {
+    width: 260px;
+    height: 27px;
+  }
+}

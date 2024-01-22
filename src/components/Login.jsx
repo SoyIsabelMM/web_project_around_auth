@@ -42,7 +42,7 @@ function Login({ title, onSubmit, nameBtn }) {
           </button>
         </form>
         <p className="authenticate__register">
-          ¿Aún no eres miembro?{" "}
+          ¿Aún no eres miembro?
           <Link to="/signup" className="link">
             Regístrate aquí
           </Link>
