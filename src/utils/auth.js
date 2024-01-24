@@ -1,12 +1,12 @@
 const BASE_URL = "https://register.nomoreparties.co";
 
-export const register = (username, password, email) => {
-  return fetch(`${BASE_URL}/singup`, {
+export const register = (password, email) => {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password, email }),
+    body: JSON.stringify({ password, email }),
   })
     .then((response) => {
       if (!response.ok) {
@@ -17,20 +17,43 @@ export const register = (username, password, email) => {
       return res;
     })
     .catch((err) => {
-      console.log(err);
+      throw new Error(`Error en la solicitud de registro: ${err.message}`);
     });
 };
 
-export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/singin`, {
+export const authorize = (password, email) => {
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ password, email }),
   })
     .then((response) => {
-      response.json();
+      console.log(response);
+      return response.json();
+    })
+    .then((credentials) => {
+      if (credentials.token) {
+        localStorage.setItem("jwt", credentials.token);
+        return credentials;
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const checkToken = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => {
+      return res.json();
     })
     .catch((err) => {
       console.log(err);

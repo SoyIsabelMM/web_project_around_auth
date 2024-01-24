@@ -10,6 +10,13 @@ function Header({ email, signOut }) {
   const handleMenu = () => {
     setOpen(!open);
   };
+
+  const onSignOut = () => {
+    console.log("hola");
+    signOut();
+    setOpen(false);
+  };
+
   return (
     <>
       <header className={`header ${open ? "header_menu-open" : ""}`}>
@@ -34,8 +41,10 @@ function Header({ email, signOut }) {
         {useMatch("/") && (
           <>
             <div className={`header__nav-bar ${open && ""}`}>
-              <span className="header__email">isabelmartinez</span>
-              <button className="header__sign-out">Cerrar Sesión</button>
+              <span className="header__email">{email}</span>
+              <button className="header__sign-out" onClick={onSignOut}>
+                Cerrar Sesión
+              </button>
               <div className="header__divider-menu"></div>
             </div>
 

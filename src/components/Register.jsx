@@ -1,30 +1,58 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import InfoTooltip from "./InfoTooltip";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as auth from "../utils/auth";
 
-function Register({ title, onSubmit, nameBtn }) {
+function Register({ title, nameBtn }) {
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [isInfoOpen, setIsInfoOpen] = useState("");
+
+  const [error, setError] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+
+    setCredentials({
+      ...credentials,
+      [name]: value,
+    });
+  };
 
   const handleCloseInfo = () => {
     setIsInfoOpen("open");
+    setError(false);
   };
 
-  const handleSubmit = (evt) => {
+  const onRegister = (evt) => {
     evt.preventDefault();
-    onSubmit();
+
+    const { password, email } = credentials;
+
+    auth.register(password, email).then((res) => {
+      if (res.credentials) {
+        navigate("/signin", { state: "success" });
+      } else {
+        setError(true);
+      }
+
+      setIsInfoOpen(true);
+    });
   };
 
   return (
     <>
-      <section className="authenticate" id="register">
+      <section className="authenticate" id="register" onSubmit={onRegister}>
         <h3 className="title">{title}</h3>
-        <form className="authenticate__form" noValidate onSubmit={handleSubmit}>
+        <form className="authenticate__form" noValidate>
           <Input
             className={"authenticate__input"}
             type={"email"}
             placeholder={"Correo electrónico"}
             id={"email"}
+            onChange={handleChange}
           />
           <Input
             className={"authenticate__input"}
@@ -32,6 +60,7 @@ function Register({ title, onSubmit, nameBtn }) {
             placeholder={"Contraseña"}
             id={"password"}
             maxLength={"200"}
+            onChange={handleChange}
           />
           <button className="authenticate__btn" type="submit">
             {nameBtn}
@@ -45,7 +74,7 @@ function Register({ title, onSubmit, nameBtn }) {
         </p>
       </section>
       <InfoTooltip
-        error={false}
+        error={error}
         isOpen={isInfoOpen}
         onClose={handleCloseInfo}
       />

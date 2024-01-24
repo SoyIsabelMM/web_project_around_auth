@@ -10,10 +10,11 @@ import EditProfilePopup from "./EditProfilePopup.js";
 import ConfirmationPopup from "./ConfirmationPopup.js";
 import ImagePopup from "./ImagePopup";
 import AddPlacePopup from "./AddPlacePopup.js";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
-// import InfoTooltip from "./InfoTooltip.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
+import * as auth from "../utils/auth.js";
 
 function App() {
   //** Manejo de estado de los Popups (abrir o cerrar) valor inicial: Cerrado "true"*/
@@ -24,12 +25,19 @@ function App() {
   //**Manejo de estado de la data del usuario */
   const [currentUser, setCurrentUser] = useState(null);
 
+  //** constantes para inicio de estado de cada componente Card*/
   const [cards, setCards] = useState([]);
 
   const [selectedCard, setSelectedCard] = useState(null);
 
   const [confirmation, setConfirmation] = useState(null);
   const [cardToDelete, setCardToDelete] = useState(null);
+
+  //** Constantes para inicio de estado, manejo de autorización */
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     api
@@ -150,25 +158,63 @@ function App() {
     setCardToDelete(null);
   };
 
+  /** Funciones para manejo de autorización */
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("jwt");
+    setEmail("");
+    setLoggedIn(false);
+  };
+
+  useEffect(() => {
+    const handleCheckToken = () => {
+      if (localStorage.getItem("jwt")) {
+        const jwt = localStorage.getItem("jwt");
+
+        console.log(jwt);
+        auth
+          .checkToken(jwt)
+          .then((res) => {
+            if (res.data) {
+              setEmail(res.data.email);
+              setLoggedIn(true);
+              navigate("/");
+            } else {
+              console.error("El token no es valido:");
+            }
+          })
+          .catch((err) => {
+            console.error("Error al verificar el token:", err);
+          });
+      }
+    };
+    handleCheckToken();
+  }, [loggedIn, navigate]);
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header email={email} signOut={handleSignOut} />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Main
-                onEditProfileClick={handleEditProfileClick}
-                onAddPlaceClick={handleAddPlaceClick}
-                onEditAvatarClick={handleEditAvatarClick}
-                onCardClick={handleCardClick}
-                onCardLike={handleCardLikeOrDisLike}
-                onCardDelete={handleOpenConfirmation}
-                cards={cards}
-              />
-            }
-          />
+          <Route path="/" element={<ProtectedRoute loggedIn={loggedIn} />}>
+            <Route
+              path="/"
+              to={
+                <Main
+                  onEditProfileClick={handleEditProfileClick}
+                  onAddPlaceClick={handleAddPlaceClick}
+                  onEditAvatarClick={handleEditAvatarClick}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLikeOrDisLike}
+                  onCardDelete={handleOpenConfirmation}
+                  cards={cards}
+                />
+              }
+            />
+          </Route>
           <Route
             path="/signup"
             element={<Register title={"Regístrate"} nameBtn={"Regístrate"} />}
@@ -176,11 +222,15 @@ function App() {
           <Route
             path="/signin"
             element={
-              <Login title={"Inicia sesión"} nameBtn={"Inicia sesión"} />
+              <Login
+                title={"Inicia sesión"}
+                nameBtn={"Inicia sesión"}
+                handleLogin={handleLogin}
+              />
             }
           />
+          <Route path="*" element={<Navigate to="/signup" />} />
         </Routes>
-        {/* <InfoTooltip /> */}
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
