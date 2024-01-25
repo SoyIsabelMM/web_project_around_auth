@@ -8,8 +8,7 @@ function Register({ title, nameBtn }) {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const [error, setError] = useState(false);
-
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const navigate = useNavigate();
 
@@ -23,9 +22,7 @@ function Register({ title, nameBtn }) {
   };
 
   const handleCloseInfo = () => {
-    setError(false);
-    setOpen(false);
-    console.log("holahola");
+    setOpen(true);
   };
 
   const onRegister = (evt) => {
@@ -37,8 +34,6 @@ function Register({ title, nameBtn }) {
         console.log(res);
         if (res.data) {
           navigate("/signin", { state: "success" });
-          setOpen(false);
-          setError(false);
         } else {
           setError(true);
           setOpen(false);

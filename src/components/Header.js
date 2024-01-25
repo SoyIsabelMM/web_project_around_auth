@@ -12,7 +12,6 @@ function Header({ email, signOut }) {
   };
 
   const onSignOut = () => {
-    console.log("hola");
     signOut();
     setOpen(false);
   };

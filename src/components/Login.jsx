@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import InfoTooltip from "./InfoTooltip";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import * as auth from "../utils/auth";
 
 function Login({ title, handleLogin, nameBtn }) {
-  const [error, setError] = useState(false);
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
+  const [error, setError] = useState(false);
+  const [open, setOpen] = useState(true);
+
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state === "success") {
+      setOpen(false);
+      setError(false);
+    }
+  }, [location.state]);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
+
     setCredentials({
       ...credentials,
       [name]: value,
@@ -23,8 +34,6 @@ function Login({ title, handleLogin, nameBtn }) {
     auth
       .authorize(credentials.password, credentials.email)
       .then((responseData) => {
-        console.log("la data", responseData);
-
         if (responseData.token) {
           setCredentials({ email: "", password: "" });
           navigate("/");
@@ -40,7 +49,7 @@ function Login({ title, handleLogin, nameBtn }) {
   };
 
   const handleCloseInfo = () => {
-    setError(false);
+    setOpen(true);
     navigate("/signin", { state: {} });
   };
 
@@ -75,7 +84,7 @@ function Login({ title, handleLogin, nameBtn }) {
         </p>
       </section>
 
-      <InfoTooltip error={error} onClose={handleCloseInfo} />
+      <InfoTooltip error={error} onClose={handleCloseInfo} open={open} />
     </>
   );
 }
