@@ -22,6 +22,7 @@ function Input({
         required
         onChange={onChange}
         value={value}
+        name={id}
       />
       {children}
     </>

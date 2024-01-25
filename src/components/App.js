@@ -59,6 +59,9 @@ function App() {
       });
   }, []);
 
+  console.log(cards);
+  console.log(loggedIn);
+
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(false);
   };

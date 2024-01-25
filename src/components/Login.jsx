@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as auth from "../utils/auth";
 
 function Login({ title, handleLogin, nameBtn }) {
-  const [isInfoOpen, setIsInfoOpen] = useState("");
+  const [error, setError] = useState(false);
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
@@ -18,9 +18,10 @@ function Login({ title, handleLogin, nameBtn }) {
     });
   };
 
+  console.log(credentials);
+
   const onLogin = (evt) => {
     evt.preventDefault();
-
     auth
       .authorize(credentials.password, credentials.email)
       .then((responseData) => {
@@ -33,7 +34,7 @@ function Login({ title, handleLogin, nameBtn }) {
         }
       })
       .catch((err) => {
-        setIsInfoOpen(true);
+        setError(true);
         setCredentials({ email: "", password: "" });
         handleLogin();
         console.log(err);
@@ -41,7 +42,7 @@ function Login({ title, handleLogin, nameBtn }) {
   };
 
   const handleCloseInfo = () => {
-    setIsInfoOpen("open");
+    setError(false);
     navigate("/signin", { state: {} });
   };
 
@@ -76,7 +77,7 @@ function Login({ title, handleLogin, nameBtn }) {
         </p>
       </section>
 
-      <InfoTooltip error={true} isOpen={isInfoOpen} onClose={handleCloseInfo} />
+      <InfoTooltip error={error} onClose={handleCloseInfo} />
     </>
   );
 }
