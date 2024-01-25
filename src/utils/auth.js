@@ -9,9 +9,12 @@ export const register = (password, email) => {
     body: JSON.stringify({ password, email }),
   })
     .then((response) => {
+      console.log(response);
       if (!response.ok) {
         throw new Error(`Error al registrarse: ${response.status}`);
       }
+
+      return response.json();
     })
     .then((res) => {
       return res;
@@ -31,11 +34,9 @@ export const authorize = (password, email) => {
     body: JSON.stringify({ password, email }),
   })
     .then((response) => {
-      console.log(response);
       return response.json();
     })
     .then((credentials) => {
-      console.log(credentials, "soy yo");
       if (credentials.token) {
         localStorage.setItem("jwt", credentials.token);
         return credentials;

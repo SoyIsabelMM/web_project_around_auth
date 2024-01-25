@@ -6,9 +6,10 @@ import * as auth from "../utils/auth";
 
 function Register({ title, nameBtn }) {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const [isInfoOpen, setIsInfoOpen] = useState("");
 
   const [error, setError] = useState(false);
+
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -22,24 +23,32 @@ function Register({ title, nameBtn }) {
   };
 
   const handleCloseInfo = () => {
-    setIsInfoOpen("open");
     setError(false);
+    setOpen(false);
+    console.log("holahola");
   };
 
   const onRegister = (evt) => {
     evt.preventDefault();
 
-    const { password, email } = credentials;
-
-    auth.register(password, email).then((res) => {
-      if (res.credentials) {
-        navigate("/signin", { state: "success" });
-      } else {
+    auth
+      .register(credentials.password, credentials.email)
+      .then((res) => {
+        console.log(res);
+        if (res.data) {
+          navigate("/signin", { state: "success" });
+          setOpen(false);
+          setError(false);
+        } else {
+          setError(true);
+          setOpen(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
         setError(true);
-      }
-
-      setIsInfoOpen(true);
-    });
+        setOpen(false);
+      });
   };
 
   return (
@@ -73,11 +82,7 @@ function Register({ title, nameBtn }) {
           </Link>
         </p>
       </section>
-      <InfoTooltip
-        error={error}
-        isOpen={isInfoOpen}
-        onClose={handleCloseInfo}
-      />
+      <InfoTooltip error={error} onClose={handleCloseInfo} open={open} />
     </>
   );
 }

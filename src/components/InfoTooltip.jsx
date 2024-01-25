@@ -3,9 +3,9 @@ import closeIcon from "../images/close-icon.png";
 import denied from "../images/denied.png";
 import accepted from "../images/accepted.png";
 
-function InfoTooltip({ onClose, error }) {
+function InfoTooltip({ onClose, error, open }) {
   return (
-    <section className={`popup ${!error && "open"}`} id="info">
+    <section className={`popup ${open && "open"}`} id="info">
       <div className="popup__overlay"></div>
 
       <button

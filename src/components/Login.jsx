@@ -18,8 +18,6 @@ function Login({ title, handleLogin, nameBtn }) {
     });
   };
 
-  console.log(credentials);
-
   const onLogin = (evt) => {
     evt.preventDefault();
     auth

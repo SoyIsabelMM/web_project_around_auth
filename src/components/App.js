@@ -59,9 +59,6 @@ function App() {
       });
   }, []);
 
-  console.log(cards);
-  console.log(loggedIn);
-
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(false);
   };
@@ -202,10 +199,10 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Header email={email} signOut={handleSignOut} />
         <Routes>
-          <Route path="/" element={<ProtectedRoute loggedIn={loggedIn} />}>
-            <Route
-              path="/"
-              to={
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute loggedIn={loggedIn}>
                 <Main
                   onEditProfileClick={handleEditProfileClick}
                   onAddPlaceClick={handleAddPlaceClick}
@@ -215,9 +212,10 @@ function App() {
                   onCardDelete={handleOpenConfirmation}
                   cards={cards}
                 />
-              }
-            />
-          </Route>
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/signup"
             element={<Register title={"Regístrate"} nameBtn={"Regístrate"} />}
